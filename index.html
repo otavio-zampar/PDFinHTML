@@ -13,12 +13,27 @@
 
     <script>
         var doc = new jsPDF({
-            orientation: 'landscape',
-            unit: 'cm',
-            format: 'letter'
-        })
-        doc.text('Hello world!', 10, 10)
-        doc.save('a11.pdf')
+            unit: "px",
+            Format: "a4",
+            putOnlyUsedFonts: true
+        });
+        
+        doc.text('RELATÓRIO DE FOLHA DE PAGAMENTO - CONFERÊNCIA', 131, 10);
+        var lines = [
+            [30, 35],
+            [-10, -45],
+            [-30, 35],
+            [50, -20]
+        ];
+        doc.lines(lines, 40, 40, [1,1], 'S', false)
+
+        var imgReal = new Image();
+        imgReal.onload = function() {
+            doc.addImage(imgReal, 'PNG', 10, 10);
+        };
+        imgReal.src = 'FM2CCorporativo.png';
     </script>
+
+    <button onclick="doc.save('a11.pdf')">Salvar PDF</button>
 </body>
 </html>
